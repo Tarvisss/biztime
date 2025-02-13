@@ -29,8 +29,8 @@ router.get('/:code', async (req, res, next) => {
 });
 router.post('/', async (req, res, next) => {
     try {
-        const { code, name } = req.body;
-        const results = await db.query('INSERT INTO companies (code, name) VALUES ($1,$2) RETURNING *', [code, name] );
+        const { code, name, description } = req.body;
+        const results = await db.query('INSERT INTO companies (code, name, description) VALUES ($1,$2,$3) RETURNING *', [code, name, description] );
         return res.status(201).json(results.rows[0]);
     } catch (error) {
         return next(error)
